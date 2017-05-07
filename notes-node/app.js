@@ -1,5 +1,8 @@
 console.log("Starting notes-node application.");
 
-// require fs module
 const fs = require('fs');
-fs.appendFile('greetings.txt', "Hello from Node.js!");
+const os = require('os');
+
+var user = os.userInfo();
+
+fs.appendFile('greetings.txt', `Hello ${ user.username }!`);
