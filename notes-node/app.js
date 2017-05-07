@@ -1,5 +1,3 @@
-console.log("Starting notes-node application.");
-
 const fs = require('fs');
 const os = require('os');
 
