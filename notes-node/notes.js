@@ -9,6 +9,7 @@ var addNote = (title, body) => {
         body
     };
 
+    // prevent the app from crashing if the noteFile doesn't exist
     try {
         var noteString = fs.readFileSync(noteFile);
         notes = JSON.parse(noteString);
@@ -16,6 +17,7 @@ var addNote = (title, body) => {
         // console.log(e);
     }
 
+    // avoid creating duplicated notes
     var duplicateNotes = notes.filter((note) => note.title === title); // ES6 style
     if (duplicateNotes.length === 0) {
         notes.push(note);
