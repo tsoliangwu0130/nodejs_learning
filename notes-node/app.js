@@ -8,7 +8,12 @@ const argv = yargs.argv;
 var command = argv._[0];
 
 if (command === 'add') {
-    notes.addNote(argv.title, argv.body);
+    var note = notes.addNote(argv.title, argv.body);
+    if (note) {
+        console.log(`${ note.title } created sucessfully!`);
+    } else {
+        console.log(`${ argv.title } has already been used.`);
+    }
 } else if (command === 'remove') {
     notes.removeNote(argv.title);
 } else if (command === 'read') {
