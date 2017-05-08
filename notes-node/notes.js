@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const noteFile = 'note-data.json';
+
 var addNote = (title, body) => {
     var notes = [];
     var note = {
@@ -8,7 +10,7 @@ var addNote = (title, body) => {
     };
 
     try {
-        var noteString = fs.readFileSync('note-data.json');
+        var noteString = fs.readFileSync(noteFile);
         notes = JSON.parse(noteString);
     } catch (e) {
         // console.log(e);
@@ -17,7 +19,7 @@ var addNote = (title, body) => {
     var duplicateNotes = notes.filter((note) => note.title === title); // ES6 style
     if (duplicateNotes.length === 0) {
         notes.push(note);
-        fs.writeFileSync('note-data.json', JSON.stringify(notes));
+        fs.writeFileSync(noteFile, JSON.stringify(notes));
     }
 };
 
