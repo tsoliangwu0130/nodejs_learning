@@ -16,7 +16,7 @@ if (command === 'add') {
     }
 } else if (command === 'remove') {
     var noteRemoved = notes.removeNote(argv.title);
-    var message = noteRemoved ? `Note ${ argv.title } was removed!` : `Note ${ argv.title } not found.` // one-line condition
+    var message = noteRemoved ? `Note ${ argv.title } was removed!` : `Note ${ argv.title } not found.` // shorthand for if statement
     console.log(message);
 } else if (command === 'read') {
     notes.readNote(argv.title);
