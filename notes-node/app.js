@@ -28,7 +28,9 @@ if (command === 'add') {
         console.log(`Note ${ argv.title } not found.`);
     }
 } else if (command === 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(`Printing ${ allNotes.length } note(s)...`);
+    allNotes.forEach((note) => notes.logNote(note));
 } else {
     console.log('Command not recognized!');
 }

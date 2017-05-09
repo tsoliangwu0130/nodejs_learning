@@ -46,7 +46,7 @@ var getNote = (title) => {
 };
 
 var getAll = () => {
-    console.log('Getting all notes...');
+    return fetchNotes();
 };
 
 var logNote = (note) => {
