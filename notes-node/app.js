@@ -15,7 +15,9 @@ if (command === 'add') {
         console.log(`${ argv.title } has already been used.`);
     }
 } else if (command === 'remove') {
-    notes.removeNote(argv.title);
+    var noteRemoved = notes.removeNote(argv.title);
+    var message = noteRemoved ? `Note ${ argv.title } was removed!` : `Note ${ argv.title } not found.` // one-line condition
+    console.log(message);
 } else if (command === 'read') {
     notes.readNote(argv.title);
 } else if (command === 'list') {
