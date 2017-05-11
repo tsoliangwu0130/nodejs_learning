@@ -1,11 +1,13 @@
-console.log('Start app...');
+var getUser = (id, callback) => {
+    var user = {
+        id: id,
+        name: 'Vikram'
+    };
+    setTimeout(() => {
+        callback(user);
+    }, 3000);
+};
 
-setTimeout(() => {
-    console.log('Inside of callback...');
-}, 2000);
-
-setTimeout(() => {
-    console.log('Second setTimeout...');
-}, 0);
-
-console.log('Finish up app...');
+getUser(31, (userObject) => {
+    console.log(userObject);
+});
