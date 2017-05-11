@@ -14,8 +14,10 @@ const argv = yargs
     .alias('h', 'help')
     .argv;
 
+var encodedAddress = encodeURIComponent(argv.address);
+
 request({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json?address=Oregon%20State%20University',
+    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${ encodedAddress }`,
     json: true
 }, (error, response, body) => {
     console.log(`Address: ${ body.results[0].formatted_address }`);
