@@ -9,7 +9,8 @@
   "author": "Tso-Liang Wu",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "yargs": "^8.0.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
