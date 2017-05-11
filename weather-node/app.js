@@ -1,13 +1,8 @@
-var getUser = (id, callback) => {
-    var user = {
-        id: id,
-        name: 'Vikram'
-    };
-    setTimeout(() => {
-        callback(user);
-    }, 3000);
-};
+const request = require('request');
 
-getUser(31, (userObject) => {
-    console.log(userObject);
+request({
+    url: 'https://maps.googleapis.com/maps/api/geocode/json?address=2201%20NW%20Grant%20Ave%20corvallis',
+    json: true
+}, (error, response, body) => {
+    console.log(body);
 });
