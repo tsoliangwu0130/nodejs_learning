@@ -1,3 +1,6 @@
+// TODO: Implement defult location
+// TODO: Retrieve more detailed info
+
 const axios = require('axios');
 const yargs = require('yargs');
 
