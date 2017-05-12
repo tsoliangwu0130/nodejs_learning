@@ -13,4 +13,10 @@ app.get('/about', (req, res) => {
     });
 });
 
+app.get('/bad', (req, res) => {
+    res.send({
+        errorMessage: 'Unable to show the page.'
+    });
+});
+
 app.listen(3000); // listening on port 3000
