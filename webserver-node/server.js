@@ -3,7 +3,14 @@ const express = require('express');
 var app = express();
 
 app.get('/', (req, res) => {
-    res.send('Hello Express!');
+    res.send('<h1>Hello Express!</h1>');
+});
+
+app.get('/about', (req, res) => {
+    res.send({
+        name: 'Tso-Liang Wu',
+        school: 'OSU'
+    });
 });
 
 app.listen(3000); // listening on port 3000
