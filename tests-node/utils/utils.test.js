@@ -1,18 +1,45 @@
 /* eslint-env mocha */
 
+const expect = require('expect');
+
 const utils = require('./utils');
 
 // test cases
 it('should add two numbers', () => {
     var res = utils.add(33, 11);
-    if (res !== 44) {
-        throw new Error(`Expected 44, but got ${ res }.`);
-    }
+
+    expect(res).toBe(44).toBeA('number');
 });
 
 it('should squre a number', () => {
     var res = utils.square(9);
-    if (res !== 81) {
-        throw new Error(`Expected 81, but got ${ res }.`);
-    }
+
+    expect(res).toBe(81).toBeA('number');
+});
+
+it('should expect some values', () => {
+    expect(12).toNotBe(11);
+    expect({ name: 'Leon' }).toNotEqual({ name: 'leon' }); // objects check
+    expect([1, 2, 3]).toInclude(3);
+    expect([1, 2, 3]).toExclude(5);
+    expect({
+        name: 'Leon',
+        age: 28,
+        location: 'Corvallis'
+    }).toInclude({
+        age: 28
+    });
+});
+
+it('should set first and last names', () => {
+    var user = {
+        location: 'Corvallis',
+        age: 28
+    };
+    var res = utils.setName(user, 'Tso-Liang Wu');
+
+    expect(res).toInclude({
+        firstName: 'Tso-Liang',
+        lastName: 'Wu'
+    });
 });
