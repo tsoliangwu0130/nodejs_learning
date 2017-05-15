@@ -11,5 +11,8 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.0.1"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.26"
   }
 }
