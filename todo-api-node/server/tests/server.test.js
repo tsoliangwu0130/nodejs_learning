@@ -11,6 +11,7 @@ beforeEach((done) => {
     Todo.remove({}).then(() => done()); // empty database
 });
 
+// POST: /todos
 describe('POST /todos', () => {
     it('should create a new todo', (done) => {
         var text = 'Test todo text';
