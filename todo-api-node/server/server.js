@@ -1,3 +1,5 @@
+/* global process */
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const { ObjectID } = require('mongodb');
@@ -7,6 +9,7 @@ const { Todo } = require('./models/todo');
 const { User } = require('./models/user');
 
 var app = express();
+const port = process.env.PORT() || 3000;
 
 // middleware
 app.use(bodyParser.json());
@@ -51,8 +54,8 @@ app.post('/todos', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Started on port 3000.');
+app.listen(port, () => {
+    console.log(`Started on port ${ port }.`);
 });
 
 module.exports = { app };
