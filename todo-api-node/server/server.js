@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const _ = require('lodash');
 const { ObjectID } = require('mongodb');
 
 const { mongoose } = require('./db/mongoose');
@@ -26,6 +27,7 @@ app.get('/todos', (req, res) => {
 // GET: /todos/:id
 app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
+
     if (!ObjectID.isValid(id)) {
         return res.status(404).send();
     }
@@ -54,9 +56,41 @@ app.post('/todos', (req, res) => {
     });
 });
 
+// PATCH: /todos
+app.patch('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    var body = _.pick(req.body, ['text', 'completed']); // only pick the properties which we want user to update
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(400).send();
+    }
+
+    if (_.isBoolean(body.completed) && body.completed) {
+        body.completedAt = new Date().getTime();
+    } else {
+        body.completed = false;
+        body.completedAt = null;
+    }
+
+    Todo.findByIdAndUpdate(id, {
+        $set: body
+    }, {
+        new: true }).then((todo) => { // return the updated object
+            if (!todo) {
+                return res.status(404).send();
+            }
+
+            res.send({ todo });
+
+        }).catch(() => {
+            res.status(400).send();
+        });
+});
+
 // DELETE: /todos/:id
 app.delete('/todos/:id', (req, res) => {
     var id = req.params.id;
+
     if (!ObjectID.isValid(id)) {
         return res.status(404).send();
     }
