@@ -1,5 +1,7 @@
 /* global process */
 
+require('./config/config');
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const _ = require('lodash');
@@ -10,7 +12,7 @@ const { Todo } = require('./models/todo');
 const { User } = require('./models/user');
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // middleware
 app.use(bodyParser.json());
