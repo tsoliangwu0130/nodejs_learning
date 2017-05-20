@@ -33,6 +33,7 @@ var UserSchema = new mongoose.Schema({
     }]
 });
 
+// instance methods
 // only return _id and email properties to users
 UserSchema.methods.toJSON = function () {
     var user = this;
@@ -48,6 +49,24 @@ UserSchema.methods.generateAuthToken = function () {
     user.tokens.push({ access, token });
     return user.save().then(() => {
         return token;
+    });
+};
+
+// module methods
+UserSchema.statics.findByToken = function (token) {
+    var User = this;
+    var decoded;
+
+    try {
+        decoded = jwt.verify(token, 'secret');
+    } catch (err) {
+        return Promise.reject();
+    }
+
+    return User.findOne({
+        '_id': decoded._id,
+        'tokens.token': token,
+        'tokens.access': 'auth'
     });
 };
 

@@ -10,6 +10,7 @@ const { ObjectID } = require('mongodb');
 const { mongoose } = require('./db/mongoose');
 const { Todo } = require('./models/todo');
 const { User } = require('./models/user');
+const { authenticate } = require('./middleware/authenticate');
 
 var app = express();
 const port = process.env.PORT;
@@ -105,6 +106,11 @@ app.delete('/todos/:id', (req, res) => {
     }).catch((err) => {
         res.status(400).send(err);
     });
+});
+
+// GET: /users/me
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
 // POST: /users
