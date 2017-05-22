@@ -1,6 +1,24 @@
+const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 
 const { Todo } = require('./../../models/todo');
+const { User } = require('./../../models/user');
+
+const userOneId = new ObjectID();
+const userTwoId = new ObjectID();
+const users = [{
+    _id: userOneId,
+    email: 'tsoliangwu@example.com',
+    password: 'userOnePass',
+    tokens: [{
+        access: 'auth',
+        token: jwt.sign({ _id: userOneId, access: 'auth' }, 'secret').toString()
+    }]
+}, {
+    _id: userTwoId,
+    email: 'leon@example.com',
+    password: 'userTwoPass'
+}];
 
 const todos = [{
     _id: new ObjectID(),
@@ -20,4 +38,14 @@ const populateTodos = (done) => {
     }).then(() => done());
 };
 
-module.exports = { todos, populateTodos };
+const populateUsers = (done) => {
+    User.remove({}).then(() => {
+        var userOne = new User(users[0]).save();
+        var userTwo = new User(users[1]).save();
+
+        // multiple promises
+        return Promise.all([userOne, userTwo]);
+    }).then(() => done());
+};
+
+module.exports = { todos, populateTodos, users, populateUsers };
