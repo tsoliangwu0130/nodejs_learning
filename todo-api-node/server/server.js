@@ -66,7 +66,7 @@ app.post('/todos', authenticate, (req, res) => {
 });
 
 // PATCH: /todos
-app.patch('/todos/:id', (req, res) => {
+app.patch('/todos/:id', authenticate, (req, res) => {
     var id = req.params.id;
     var body = _.pick(req.body, ['text', 'completed']); // only pick the properties which we want user to update
 
@@ -81,19 +81,15 @@ app.patch('/todos/:id', (req, res) => {
         body.completedAt = null;
     }
 
-    Todo.findByIdAndUpdate(id, {
-        $set: body
-    }, {
-        new: true }).then((todo) => { // return the updated object
-            if (!todo) {
-                return res.status(404).send();
-            }
+    Todo.findOneAndUpdate({ _id: id, _creator: req.user._id }, { $set: body }, { new: true }).then((todo) => { // return the updated object
+        if (!todo) {
+            return res.status(404).send();
+        }
 
-            res.send({ todo });
-
-        }).catch(() => {
-            res.status(400).send();
-        });
+        res.send({ todo });
+    }).catch(() => {
+        res.status(400).send();
+    });
 });
 
 // DELETE: /todos/:id
