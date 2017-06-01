@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-      "node": "6.10.2"
+    "node": "6.10.2"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "eslint-plugin-react": "^7.0.1"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "socket.io": "^2.0.1"
   }
 }
