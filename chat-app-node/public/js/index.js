@@ -1,4 +1,4 @@
-/* global io */
+/* global io, jQuery */
 
 var socket = io();
 socket.on('connect', function () {
@@ -19,4 +19,16 @@ socket.emit('createMessage', {
     text: 'Hi!'
 }, function (data) {
     console.log(data);
+});
+
+jQuery('#message-form').on('submit', function(e) {
+    // prevent the default behavior: not refresh the page
+    e.preventDefault();
+
+    socket.emit('createMessage', {
+        from: 'User',
+        text: jQuery('[name=message]').val()
+    }, function () {
+        
+    });
 });
