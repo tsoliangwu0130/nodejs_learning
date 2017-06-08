@@ -12,13 +12,9 @@ socket.on('disconnect', function () {
 // event listener: newMessage
 socket.on('newMessage', function (message) {
     console.log('newMessage.', message);
-});
-
-socket.emit('createMessage', {
-    from: 'Frank',
-    text: 'Hi!'
-}, function (data) {
-    console.log(data);
+    var li = jQuery('<li></li>'); // create a new li element
+    li.text(`${ message.from }: ${ message.text }`); // with this template text
+    jQuery('#messages').append(li); // then add into #messages
 });
 
 jQuery('#message-form').on('submit', function(e) {
@@ -29,6 +25,6 @@ jQuery('#message-form').on('submit', function(e) {
         from: 'User',
         text: jQuery('[name=message]').val()
     }, function () {
-        
+
     });
 });
