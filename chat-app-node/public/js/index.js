@@ -33,14 +33,16 @@ socket.on('newLocationMessage', function (message) {
 });
 
 jQuery('#message-form').on('submit', function(e) {
+    var messageTextbox = jQuery('[name=message]');
+
     // prevent the default behavior: not refresh the page
     e.preventDefault();
 
     socket.emit('createMessage', {
         from: 'User',
-        text: jQuery('[name=message]').val()
+        text: messageTextbox.val()
     }, function () {
-
+        messageTextbox.val('');
     });
 });
 
