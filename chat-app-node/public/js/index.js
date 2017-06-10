@@ -1,4 +1,4 @@
-/* global io, jQuery, moment */
+/* global io, jQuery, moment, Mustache */
 
 var socket = io();
 socket.on('connect', function () {
@@ -11,25 +11,43 @@ socket.on('disconnect', function () {
 
 // event listener: newMessage
 socket.on('newMessage', function (message) {
+    // **** stupid way ****
+    // var li = jQuery('<li></li>'); // create a new li element
+    // li.text(`${ message.from } ${  formattedTime }: ${ message.text }`); // with this template text
+    // jQuery('#messages').append(li); // then add into #messages
+
+    // **** better way using Mustache render template ****
     var formattedTime = moment(message.createAt).format('h:mm a');
-    var li = jQuery('<li></li>'); // create a new li element
+    var template = jQuery('#message-template').html();
+    var html = Mustache.render(template, {
+        text: message.text,
+        from: message.from,
+        createAt: formattedTime
+    });
 
-    li.text(`${ message.from } ${  formattedTime }: ${ message.text }`); // with this template text
-
-    jQuery('#messages').append(li); // then add into #messages
+    jQuery('#messages').append(html);
 });
 
 // event listener: newLocationMessage
 socket.on('newLocationMessage', function (message) {
+    // **** stupid way ****
+    // var li = jQuery('<li></li>');
+    // var a = jQuery('<a target="_blank" >My current location</a>');
+    // li.text(`${ message.from } ${  formattedTime }: `);
+    // a.attr('href', message.url);
+    // li.append(a);
+    // jQuery('#messages').append(li);
+
+    // **** better way using Mustache render template ****
     var formattedTime = moment(message.createAt).format('h:mm a');
-    var li = jQuery('<li></li>');
-    var a = jQuery('<a target="_blank" >My current location</a>');
+    var template = jQuery('#location-message-template').html();
+    var html = Mustache.render(template, {
+        url: message.url,
+        from: message.from,
+        createAt: formattedTime
+    });
 
-    li.text(`${ message.from } ${  formattedTime }: `);
-    a.attr('href', message.url);
-
-    li.append(a);
-    jQuery('#messages').append(li);
+    jQuery('#messages').append(html);
 });
 
 jQuery('#message-form').on('submit', function(e) {
