@@ -22,6 +22,11 @@ io.on('connection', (socket) => {
     // broadcast message from server
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined!'));
 
+    // event listener: join
+    socket.on('join', (params, callback) => {
+        
+    });
+
     // event listener: createMessage
     socket.on('createMessage', (message, callback) => {
         io.emit('newMessage', generateMessage(message.from, message.text));
