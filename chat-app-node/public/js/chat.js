@@ -23,9 +23,10 @@ socket.on('connect', function () {
 
     socket.emit('join', params, function (err) {
         if (err) {
-
+            alert(err);
+            window.location.href = '/'; // redirect user back to root page
         } else {
-            
+            console.log('No error!');
         }
     });
 });
