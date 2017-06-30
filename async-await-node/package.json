@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "currency-convert.js",
+  "dependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-plugin-react": "^7.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^4.1.1"
-  }
+  "license": "ISC"
 }
