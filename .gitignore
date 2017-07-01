@@ -5,3 +5,5 @@ notes-node/note-data.json
 webserver-node/server.log
 
 config.json
+
+.DS_Store
