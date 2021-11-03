@@ -30,6 +30,6 @@
     "lodash": "^4.17.4",
     "mongodb": "^2.2.26",
     "mongoose": "^4.9.9",
-    "validator": "^7.0.0"
+    "validator": "^13.7.0"
   }
 }
